@@ -8,6 +8,8 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/gorilla/mux"
+
 	"goshop/product-api/handlers"
 
 	"github.com/nicholasjackson/env"
@@ -25,8 +27,8 @@ func main() {
 	ph := handlers.NewProducts(l)
 
 	// create a new serve mux and register the handlers
-	sm := http.NewServeMux()
-	sm.Handle("/", ph)
+	sm := mux.NewRouter()
+	sm.Handle("/products", ph)
 
 	// create a new server
 	s := http.Server{
@@ -40,7 +42,7 @@ func main() {
 
 	// start the server
 	go func() {
-		l.Println("Starting server on port 9090")
+		l.Println("Starting server on port 9000")
 
 		err := s.ListenAndServe()
 		if err != nil {
