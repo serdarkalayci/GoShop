@@ -25,6 +25,7 @@ type Product struct {
 	DeletedOn   string  `json:"-"`
 }
 
+// Validate validates Product type
 func (p *Product) Validate() error {
 	validate := validator.New()
 	validate.RegisterValidation("sku", validateSKU)
@@ -43,27 +44,33 @@ func validateSKU(fl validator.FieldLevel) bool {
 	return true
 }
 
+// Products represents Product array
 type Products []*Product
 
+// ToJSON converts Product type to Json
 func (p *Products) ToJSON(w io.Writer) error {
 	e := json.NewEncoder(w)
 	return e.Encode(p)
 }
 
+// FromJSON converts Json to Product type
 func (p *Product) FromJSON(r io.Reader) error {
 	d := json.NewDecoder(r)
 	return d.Decode(p)
 }
 
+// GetProducts returns all products as Products type
 func GetProducts() Products {
 	return productList
 }
 
+// AddProduct adds a new product to the slice
 func AddProduct(p *Product) {
 	p.ID = getNextID()
 	productList = append(productList, p)
 }
 
+// UpdateProduct updates the product matched by id
 func UpdateProduct(id int, p *Product) error {
 	fp, i, err := findProduct(id)
 	if err != nil {
