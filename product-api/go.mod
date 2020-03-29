@@ -8,6 +8,7 @@ require (
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/go-playground/validator/v10 v10.1.0
 	github.com/go-swagger/go-swagger v0.22.0 // indirect
+	github.com/gorilla/handlers v1.4.2
 	github.com/gorilla/mux v1.7.3
 	github.com/kr/text v0.2.0 // indirect
 	github.com/nicholasjackson/env v0.6.0
